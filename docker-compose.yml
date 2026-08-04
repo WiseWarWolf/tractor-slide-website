@@ -1,0 +1,17 @@
+services:
+  app:
+    build: .
+    container_name: react-app
+    restart: unless-stopped
+    ports:
+      - "80:80"
+
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: cloudflared
+    restart: unless-stopped
+    command: tunnel run
+    environment:
+      - TUNNEL_TOKEN=${TUNNEL_TOKEN}
+    depends_on:
+      - app
