@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 export default function About() {
     return (
         <div>
-            <h1>Test page for navigation also just think about it</h1>
+            <h1>Test page for navigation also just think about it just think</h1>
             <Link to='/' >Home</Link>
         </div>
     )
