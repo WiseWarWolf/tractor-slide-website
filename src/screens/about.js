@@ -5,6 +5,7 @@ export default function About() {
         <div>
             <h1>Test page for navigation also just think about it just think really think</h1>
             <Link to='/' >Home</Link>
+            <Link to='/contact' >Contact</Link>
         </div>
     )
 

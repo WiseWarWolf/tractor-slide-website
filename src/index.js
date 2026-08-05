@@ -5,6 +5,7 @@ import Default from './screens/defaultScreen';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import About from './screens/about';
+import Contact from './screens/contact';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -13,6 +14,7 @@ root.render(
     <Routes>
       <Route path='/' element={<Default />}/>    
       <Route path='/about' element={<About />}/>    
+      <Route path='/contact' element={<Contact />}/>    
     </Routes>
   </BrowserRouter>
 );
