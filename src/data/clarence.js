@@ -124,7 +124,7 @@ const slides = [
   {
     src: "/images/Clarence-Vod-001.mov",
     alt: "First Start of Clarence Running after reuniting the Halfs of Clarence",
-    caption: "First Start of Clarence Running after reuniting the Halfs of Clarence",
+    caption: "First Start of Clarence Running after reuniting the Halves of Clarence",
   },
     {
     src: "/images/Clarence-Vod-002.mov",
