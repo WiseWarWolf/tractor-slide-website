@@ -1,10 +1,13 @@
-# Slide show photos
+# Slide show media
 
-Drop the tractor photos in this folder, then list them in `src/data/slides.js`.
+Drop photos and video clips in this folder, then list them in the vehicle's
+data file — `src/data/clarence.js`, or a new file beside it for a new machine.
 
-The names the slide show expects right now are `clarence-01.jpg` through
-`clarence-06.jpg`. Any name works as long as it matches the `src` in
-`slides.js` — landscape photos look best (the frame is 3:2).
+- **Photos**: landscape looks best, since the frame is 3:2.
+- **Videos**: `.mp4` (H.264) is the safe choice — every browser plays it.
+  `.webm` works nearly everywhere too. `.mov` is unreliable outside Safari, so
+  convert those to `.mp4` first. Give a video a `poster` image if you want a
+  particular frame showing before it plays.
 
-Until a file exists, that slide shows a striped placeholder telling you which
-file it's looking for.
+Until a file exists, that slide shows a striped placeholder naming the file
+it's looking for.

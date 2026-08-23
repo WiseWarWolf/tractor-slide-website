@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import Photo from "./Photo";
+import Media from "./Media";
 import "./Carousel.css";
 
 // How long to wait between wheel-triggered slide changes, so one flick of a
@@ -42,7 +42,7 @@ function Slide({ slide, isActive }) {
   return (
     <div className={`carousel-slide${isActive ? " is-active" : ""}`} aria-hidden={!isActive}>
       <div className="carousel-frame">
-        <Photo src={slide.src} alt={slide.alt} />
+        <Media slide={slide} isActive={isActive} />
       </div>
     </div>
   );
@@ -76,6 +76,8 @@ export default function Carousel({ slides }) {
   // Pointer events cover touch swipes, mouse drags and pen alike.
   function onPointerDown(event) {
     if (event.pointerType === "mouse" && event.button !== 0) return;
+    // A press on a video is aimed at its controls, not at dragging the show.
+    if (event.target.closest("video")) return;
     drag.current = { active: true, startX: event.clientX };
     event.currentTarget.setPointerCapture(event.pointerId);
   }

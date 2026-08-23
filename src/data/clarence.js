@@ -1,8 +1,20 @@
-// Clarence the Tractor: his photos.
-// Drop image files in public/images/ and list them here. `src` is relative to
-// the public folder, `alt` is for screen readers, `caption` shows under the
-// photo. A new vehicle gets its own file like this one, then an entry in
-// vehicles.js.
+// Clarence the Tractor: his photos and clips.
+//
+// Drop files in public/images/ and list them here. `src` is relative to the
+// public folder, `alt` is for screen readers, `caption` shows underneath.
+//
+// A slide is treated as a video when its file ends in .mp4/.webm/.m4v/.mov
+// (or when you set type: "video"). Videos may also take a `poster` image,
+// shown before playback starts:
+//
+//   {
+//     src: "/images/clarence-plowing.mp4",
+//     poster: "/images/clarence-plowing.jpg",
+//     alt: "Clarence plowing the lower field",
+//     caption: "Turning the lower field",
+//   },
+//
+// A new vehicle gets its own file like this one, then an entry in vehicles.js.
 const slides = [
   {
     src: "/images/Clarence-001.JPG",
@@ -12,7 +24,7 @@ const slides = [
   {
     src: "/images/Clarence-002.JPG",
     alt: "Re Wheels and axel of Clarence The Tractor",
-    caption: "Re Wheels and axel of Clarence The Tractor in peice",
+    caption: "Rear Wheels and axel of Clarence The Tractor in peice",
   },
   {
     src: "/images/Clarence-003.JPG",
@@ -21,99 +33,104 @@ const slides = [
   },
   {
     src: "/images/Clarence-004.JPG",
-    alt: "Clarence pulling a hay wagon",
-    caption: "Hauling the last of the hay",
+    alt: "Engine of Clarence in pieces",
+    caption: "Engine of Clarence in pieces",
   },
   {
     src: "/images/Clarence-005.JPG",
-    alt: "Clarence covered in mud after a wet spring",
-    caption: "Mud season",
+    alt: "Gear Shifts of Clarence in corner of room",
+    caption: "Gear Shifts of Clarence in corner of room",
   },
   {
     src: "/images/Clarence-006.JPG",
-    alt: "Clarence in the barn for the winter",
-    caption: "Tucked in for winter",
+    alt: "seat and Grill or Clarence Laying on barn floor",
+    caption: "seat and Grill or Clarence Laying on barn floor",
   },
   {
     src: "/images/Clarence-007.JPG",
-    alt: "Clarence at sunrise",
-    caption: "First light, first pass",
+    alt: "closer picture of grill and tool box",
+    caption: "closer picture of grill and tool box",
   },
   {
     src: "/images/Clarence-008.JPG",
-    alt: "Close up of Clarence's engine",
-    caption: "Still running strong",
+    alt: "Hood of Clarence leaning on barn",
+    caption: "Hood of Clarence leaning on barn",
   },
   {
     src: "/images/Clarence-009.JPG",
-    alt: "Clarence pulling a hay wagon",
-    caption: "Hauling the last of the hay",
+    alt: "Closer picture of the hood",
+    caption: "Closer picture of the hood",
   },
   {
     src: "/images/Clarence-010.JPG",
-    alt: "Clarence covered in mud after a wet spring",
-    caption: "Mud season",
+    alt: "Front end of Clarence shows tractor being in two",
+    caption: "Front end of Clarence",
   },
   {
     src: "/images/Clarence-011.JPG",
-    alt: "Clarence in the barn for the winter",
-    caption: "Tucked in for winter",
+    alt: "??",
+    caption: "??",
   },
   {
     src: "/images/Clarence-012.JPG",
-    alt: "Clarence at sunrise",
-    caption: "First light, first pass",
+    alt: "??",
+    caption: "??",
   },
   {
     src: "/images/Clarence-013.JPG",
-    alt: "Close up of Clarence's engine",
-    caption: "Still running strong",
+    alt: "??",
+    caption: "??",
   },
   {
     src: "/images/Clarence-014.JPG",
-    alt: "Clarence pulling a hay wagon",
-    caption: "Hauling the last of the hay",
+    alt: "??",
+    caption: "??",
   },
   {
     src: "/images/Clarence-015.JPG",
-    alt: "Clarence covered in mud after a wet spring",
-    caption: "Mud season",
+    alt: "??",
+    caption: "??",
   },
   {
     src: "/images/Clarence-016.JPG",
-    alt: "Clarence in the barn for the winter",
-    caption: "Tucked in for winter",
+    alt: "??",
+    caption: "??",
   },
   {
     src: "/images/Clarence-017.JPG",
-    alt: "Clarence at sunrise",
-    caption: "First light, first pass",
+    alt: "??",
+    caption: "??",
   },
   {
     src: "/images/Clarence-018.JPG",
-    alt: "Close up of Clarence's engine",
-    caption: "Still running strong",
+    alt: "Oil Filer of Clarence",
+    caption: "Oil Filer of Clarence",
   },
   {
     src: "/images/Clarence-019.JPG",
-    alt: "Clarence pulling a hay wagon",
-    caption: "Hauling the last of the hay",
+    alt: "Odameter or Clarence",
+    caption: "Odameter or Clarence",
   },
   {
     src: "/images/Clarence-020.JPG",
-    alt: "Clarence covered in mud after a wet spring",
-    caption: "Mud season",
+    alt: "Clarence put together",
+    caption: "Clarence put together",
   },
   {
     src: "/images/Clarence-021.JPG",
-    alt: "Clarence in the barn for the winter",
-    caption: "Tucked in for winter",
+    alt: "front of clarence put together",
+    caption: "front of clarence put together",
   },
   {
-    src: "/images/Clarence-022.JPG",
-    alt: "Clarence at sunrise",
-    caption: "First light, first pass",
-  }
+    src: "/images/Clarence-Vod-001.mov",
+    alt: "First Start of Clarence Running after reuniting the Halfs of Clarence",
+    caption: "First Start of Clarence Running after reuniting the Halfs of Clarence",
+  },
+    {
+    src: "/images/Clarence-Vod-002.mov",
+    alt: "longer video of Clarence running",
+    caption: "longer video of Clarence running",
+  },
 ];
 
 export default slides;

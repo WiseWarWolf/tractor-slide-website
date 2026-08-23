@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import Photo from "../components/Photo";
+import Media from "../components/Media";
 import vehicles from "../data/vehicles";
 import "../App.css";
 
@@ -19,7 +19,7 @@ export default function Default() {
             <li key={vehicle.slug}>
               <Link className="vehicle-card" to={`/vehicles/${vehicle.slug}`}>
                 <div className="vehicle-card-frame">
-                  {cover && <Photo src={cover.src} alt={cover.alt} />}
+                  {cover && <Media slide={cover} controls={false} />}
                 </div>
                 <div className="vehicle-card-body">
                   <span className="vehicle-kind">{vehicle.kind}</span>
