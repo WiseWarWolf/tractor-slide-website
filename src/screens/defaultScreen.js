@@ -6,7 +6,7 @@ import "../App.css";
 export default function Default() {
   return (
     <div className="page">
-      <h1>The Shed</h1>
+      <h1>The Johnson Family</h1>
       <p className="tagline">
         Photo tours of the machines around the place. Pick one to start the
         slide show.

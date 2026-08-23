@@ -6,18 +6,18 @@
 const slides = [
   {
     src: "/images/Clarence-001.JPG",
-    alt: "Clarence the tractor parked in the north field",
-    caption: "Clarence in the north field",
+    alt: "picture of vin plate on Clarence the Tractor",
+    caption: "Vin plate to Clarence the Tractor",
   },
   {
     src: "/images/Clarence-002.JPG",
-    alt: "Clarence at sunrise",
-    caption: "First light, first pass",
+    alt: "Re Wheels and axel of Clarence The Tractor",
+    caption: "Re Wheels and axel of Clarence The Tractor in peice",
   },
   {
     src: "/images/Clarence-003.JPG",
-    alt: "Close up of Clarence's engine",
-    caption: "Still running strong",
+    alt: "Pto shaft of clarence",
+    caption: "Pto shaft of clarence",
   },
   {
     src: "/images/Clarence-004.JPG",

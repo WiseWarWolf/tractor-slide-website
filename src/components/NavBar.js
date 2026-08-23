@@ -3,7 +3,7 @@ import { Link, NavLink, useLocation } from "react-router-dom";
 import "./NavBar.css";
 
 // Change this to rename the site in the top-left.
-const SITE_NAME = "The Shed";
+const SITE_NAME = "The Johnson Family";
 
 const LINKS = [
   { to: "/", label: "Home", end: true },
