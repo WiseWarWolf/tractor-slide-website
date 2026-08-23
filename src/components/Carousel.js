@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import Photo from "./Photo";
 import "./Carousel.css";
 
 // How long to wait between wheel-triggered slide changes, so one flick of a
@@ -38,27 +39,10 @@ function dotItems(count, index) {
 }
 
 function Slide({ slide, isActive }) {
-  const [failed, setFailed] = useState(false);
-
   return (
     <div className={`carousel-slide${isActive ? " is-active" : ""}`} aria-hidden={!isActive}>
       <div className="carousel-frame">
-        {failed ? (
-          <div className="carousel-placeholder">
-            <span className="emoji" role="img" aria-label="tractor">
-              🚜
-            </span>
-            <span>Photo not added yet</span>
-            <code>public{slide.src}</code>
-          </div>
-        ) : (
-          <img
-            src={process.env.PUBLIC_URL + slide.src}
-            alt={slide.alt}
-            draggable="false"
-            onError={() => setFailed(true)}
-          />
-        )}
+        <Photo src={slide.src} alt={slide.alt} />
       </div>
     </div>
   );

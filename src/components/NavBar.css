@@ -1,0 +1,156 @@
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(20, 28, 18, 0.88);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.navbar-inner {
+  position: relative;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+  height: 62px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: #f2f5ef;
+  text-decoration: none;
+}
+
+.navbar-menu {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.navbar-link {
+  color: #cfdcc6;
+  text-decoration: none;
+  font-size: 0.98rem;
+  padding: 6px 2px;
+  border-bottom: 2px solid transparent;
+  transition: color 150ms ease, border-color 150ms ease;
+}
+
+.navbar-link:hover {
+  color: #fff;
+  border-bottom-color: rgba(185, 217, 143, 0.6);
+}
+
+.navbar-link.is-current {
+  color: #b9d98f;
+  border-bottom-color: #b9d98f;
+}
+
+/* Hidden on wide screens; the media query below brings it back. */
+.navbar-burger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  cursor: pointer;
+}
+
+.burger-bar {
+  display: block;
+  width: 20px;
+  height: 2px;
+  margin: 0 auto;
+  border-radius: 2px;
+  background: #f2f5ef;
+  transition: transform 200ms ease, opacity 150ms ease;
+}
+
+/* Three bars fold into an X. */
+.navbar-burger.is-open .burger-bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.navbar-burger.is-open .burger-bar:nth-child(2) {
+  opacity: 0;
+}
+
+.navbar-burger.is-open .burger-bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+.navbar-burger:focus-visible,
+.navbar-brand:focus-visible,
+.navbar-link:focus-visible {
+  outline: 2px solid #8bc34a;
+  outline-offset: 3px;
+}
+
+@media (max-width: 700px) {
+  .navbar-burger {
+    display: flex;
+  }
+
+  /* Closed means display:none, so the links can't be tabbed into either. */
+  .navbar-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 8px 20px 16px;
+    background: rgba(20, 28, 18, 0.97);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .navbar-menu.is-open {
+    display: flex;
+    animation: navbar-drop 180ms ease-out;
+  }
+
+  .navbar-link {
+    padding: 14px 4px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .navbar-link.is-current {
+    border-bottom-color: #b9d98f;
+  }
+}
+
+@keyframes navbar-drop {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .burger-bar {
+    transition: none;
+  }
+
+  .navbar-menu.is-open {
+    animation: none;
+  }
+}

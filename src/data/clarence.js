@@ -1,6 +1,8 @@
-// The slide show. Drop your photos in public/images/ and list them here.
-// `src` is relative to the public folder, `alt` is for screen readers,
-// `caption` shows under the photo.
+// Clarence the Tractor: his photos.
+// Drop image files in public/images/ and list them here. `src` is relative to
+// the public folder, `alt` is for screen readers, `caption` shows under the
+// photo. A new vehicle gets its own file like this one, then an entry in
+// vehicles.js.
 const slides = [
   {
     src: "/images/Clarence-001.JPG",

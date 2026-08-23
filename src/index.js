@@ -1,20 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import Default from './screens/defaultScreen';
-import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Layout from './components/Layout';
+import Default from './screens/defaultScreen';
+import Vehicle from './screens/vehicle';
 import About from './screens/about';
 import Contact from './screens/contact';
+import NotFound from './screens/notFound';
+import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
   <BrowserRouter>
     <Routes>
-      <Route path='/' element={<Default />}/>    
-      <Route path='/about' element={<About />}/>    
-      <Route path='/contact' element={<Contact />}/>    
+      {/* Layout draws the nav bar around every page below it. */}
+      <Route element={<Layout />}>
+        <Route path='/' element={<Default />}/>
+        <Route path='/vehicles/:slug' element={<Vehicle />}/>
+        <Route path='/about' element={<About />}/>
+        <Route path='/contact' element={<Contact />}/>
+        <Route path='*' element={<NotFound />}/>
+      </Route>
     </Routes>
   </BrowserRouter>
 );
