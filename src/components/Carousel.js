@@ -7,6 +7,13 @@ import "./Carousel.css";
 const WHEEL_COOLDOWN_MS = 500;
 // How far a drag has to travel before it counts as a swipe.
 const SWIPE_THRESHOLD_PX = 50;
+// How far a gesture has to move before we decide which way it's going.
+const AXIS_LOCK_PX = 10;
+// Sideways wheel movement has to add up to this much before the show moves,
+// and a gap this long starts the tally over. Wobble never accumulates; a
+// deliberate swipe crosses the line almost at once.
+const WHEEL_ADVANCE_PX = 60;
+const WHEEL_GESTURE_GAP_MS = 200;
 // Most dots to show at once. Past this the row becomes first … window … last.
 const MAX_DOTS = 7;
 
@@ -48,12 +55,17 @@ function Slide({ slide, isActive }) {
   );
 }
 
+// A fresh object each time: the live one gets mutated once its axis is known.
+const noDrag = () => ({ id: null, startX: 0, startY: 0, axis: null });
+
 export default function Carousel({ slides }) {
   const [index, setIndex] = useState(0);
-  // Live offset while a drag is in progress, so the photos follow the pointer.
+  // Live offset while a sideways drag is in progress, so the photos follow
+  // the pointer.
   const [dragX, setDragX] = useState(0);
-  const drag = useRef({ active: false, startX: 0 });
+  const drag = useRef(noDrag());
   const lastWheelAt = useRef(0);
+  const wheelTally = useRef({ total: 0, at: 0 });
 
   const count = slides.length;
 
@@ -73,49 +85,96 @@ export default function Carousel({ slides }) {
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [advance]);
 
-  // Pointer events cover touch swipes, mouse drags and pen alike.
+  // Pointer events cover touch swipes, mouse drags and pen alike. Nothing is
+  // captured up front: a gesture has to prove it's horizontal first, so
+  // scrolling the page still belongs to the page.
   function onPointerDown(event) {
+    // Never inherit anything from a gesture that came before.
+    drag.current = noDrag();
     if (event.pointerType === "mouse" && event.button !== 0) return;
-    // A press on a video is aimed at its controls, not at dragging the show.
-    if (event.target.closest("video")) return;
-    drag.current = { active: true, startX: event.clientX };
-    event.currentTarget.setPointerCapture(event.pointerId);
+    // A press on a playing video is aimed at its controls. An unplayed clip
+    // sits inert behind its play button, so it swipes like a photo.
+    const video = event.target.closest("video");
+    if (video && video.controls) return;
+    drag.current = {
+      id: event.pointerId,
+      startX: event.clientX,
+      startY: event.clientY,
+      axis: null,
+    };
   }
 
   function onPointerMove(event) {
-    if (!drag.current.active) return;
-    setDragX(event.clientX - drag.current.startX);
+    const state = drag.current;
+    if (state.id !== event.pointerId) return;
+
+    const travelledX = event.clientX - state.startX;
+    const travelledY = event.clientY - state.startY;
+
+    if (state.axis === null) {
+      // Too early to tell — let the gesture develop.
+      if (Math.max(Math.abs(travelledX), Math.abs(travelledY)) < AXIS_LOCK_PX) return;
+
+      if (Math.abs(travelledY) >= Math.abs(travelledX)) {
+        // They're scrolling the page. Bow out for the rest of the gesture.
+        drag.current = noDrag();
+        return;
+      }
+
+      state.axis = "x";
+      // Only now take the pointer, so a vertical scroll is never intercepted.
+      event.currentTarget.setPointerCapture(event.pointerId);
+    }
+
+    setDragX(travelledX);
   }
 
   function onPointerEnd(event) {
-    if (!drag.current.active) return;
-    const travelled = event.clientX - drag.current.startX;
-    drag.current.active = false;
+    const state = drag.current;
+    if (state.id !== event.pointerId) return;
+
+    const travelled = event.clientX - state.startX;
+    const wasHorizontal = state.axis === "x";
+    drag.current = noDrag();
     setDragX(0);
-    if (Math.abs(travelled) >= SWIPE_THRESHOLD_PX) advance(travelled < 0 ? 1 : -1);
+
+    if (wasHorizontal && Math.abs(travelled) >= SWIPE_THRESHOLD_PX) {
+      advance(travelled < 0 ? 1 : -1);
+    }
   }
 
   function onWheel(event) {
-    // Only react to sideways intent: a horizontal trackpad swipe, or
-    // shift + wheel. Plain vertical scrolling still scrolls the page.
-    const delta =
-      Math.abs(event.deltaX) > Math.abs(event.deltaY)
-        ? event.deltaX
-        : event.shiftKey
-        ? event.deltaY
-        : 0;
-    if (Math.abs(delta) < 15) return;
-
     const now = Date.now();
-    if (now - lastWheelAt.current < WHEEL_COOLDOWN_MS) return;
-    lastWheelAt.current = now;
+    const tally = wheelTally.current;
 
-    advance(delta > 0 ? 1 : -1);
+    // Shift + wheel is unambiguous. Otherwise only sideways-dominant movement
+    // counts, and plain vertical scrolling is left to the page.
+    const sideways = event.shiftKey
+      ? (Math.abs(event.deltaX) >= Math.abs(event.deltaY) ? event.deltaX : event.deltaY)
+      : (Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : 0);
+
+    if (sideways === 0) {
+      // A vertical frame forgets whatever sideways drift came before it, so
+      // the jitter a trackpad emits mid-scroll can never add up to a swipe.
+      tally.total = 0;
+      return;
+    }
+
+    if (now - tally.at > WHEEL_GESTURE_GAP_MS) tally.total = 0;
+    tally.at = now;
+    tally.total += sideways;
+
+    if (Math.abs(tally.total) < WHEEL_ADVANCE_PX) return;
+    if (now - lastWheelAt.current < WHEEL_COOLDOWN_MS) return;
+
+    lastWheelAt.current = now;
+    tally.total = 0;
+    advance(sideways > 0 ? 1 : -1);
   }
 
   if (count === 0) return null;
 
-  const dragging = drag.current.active;
+  const dragging = drag.current.axis === "x";
 
   return (
     <div className="carousel">

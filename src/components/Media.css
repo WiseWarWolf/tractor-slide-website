@@ -4,6 +4,52 @@
   object-fit: cover;
   display: block;
   background: #21301f;
+  /* A touch that starts on a photo or clip can always scroll the page. */
+  touch-action: pan-y;
+}
+
+.media-video {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.media-play {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 68px;
+  height: 68px;
+  padding: 0 0 0 4px;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 50%;
+  background: rgba(20, 28, 18, 0.6);
+  color: #fff;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  backdrop-filter: blur(2px);
+  transition: transform 150ms ease, background 150ms ease;
+}
+
+.media-play:hover {
+  background: rgba(20, 28, 18, 0.8);
+  transform: scale(1.06);
+}
+
+.media-play:focus-visible {
+  outline: 2px solid #8bc34a;
+  outline-offset: 3px;
+}
+
+ (prefers-reduced-motion: reduce) {
+  .media-play {
+    transition: none;
+  }
+
+  .media-play:hover {
+    transform: none;
+  }
 }
 
 .media-placeholder {
