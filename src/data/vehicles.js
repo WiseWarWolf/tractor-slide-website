@@ -10,7 +10,7 @@ const vehicles = [
     kind: "Tractor",
     tagline: "A slide show of one very good tractor.",
     description:
-      "Clarence through the seasons — field work, hay hauling, mud, and a spell in the barn.",
+      "Photos of Clarence the Tractor -- From being in pieces to a family tractor",
     slides: clarenceSlides,
   },
 ];
