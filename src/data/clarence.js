@@ -126,7 +126,7 @@ const slides = [
   },
   {
     src: "/images/Clarence-018.JPG",
-    alt: "Oil filter of Clarence",
+    alt: " ",
   },
   {
     src: "/images/Clarence-019.JPG",
